@@ -1,0 +1,18 @@
+# Keeps the build context small, which makes builds faster AND stops secrets
+# or local junk from ending up in an image layer. A .env copied into an image
+# is a credential leak that survives every `docker push`.
+.env
+.git
+.github
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+**/.ruff_cache
+**/.mypy_cache
+**/htmlcov
+**/.coverage
+**/.venv
+**/venv
+**/staticfiles
+docs
+*.md

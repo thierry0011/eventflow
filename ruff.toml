@@ -1,0 +1,33 @@
+# Ruff replaces flake8 + isort + black + pyupgrade + several plugins, and runs
+# in roughly a tenth of a second on a repo this size. If your project still
+# runs four separate tools, this is the easiest improvement available.
+
+line-length = 90
+target-version = "py312"
+
+[lint]
+select = [
+    "E", "W",    # pycodestyle
+    "F",         # pyflakes — unused imports, undefined names
+    "I",         # isort — import ordering
+    "UP",        # pyupgrade — modernise syntax for the target version
+    "B",         # bugbear — mutable defaults, loop-variable capture, and more
+    "C4",        # comprehensions
+    "SIM",       # simplify
+    "RUF",       # ruff's own rules
+    "ASYNC",     # async antipatterns — catches blocking calls in async defs
+    "S",         # bandit — security
+]
+ignore = [
+    "E501",      # line length is handled by the formatter
+    "S101",      # assert: fine in tests
+    "B008",      # function call in default arg: FastAPI's Depends() needs it
+]
+
+[lint.per-file-ignores]
+"**/tests/**" = ["S", "ARG"]
+"**/migrations/**" = ["ALL"]
+"**/alembic/**" = ["ALL"]
+
+[lint.isort]
+known-first-party = ["app", "orders", "config", "eventflow_common"]

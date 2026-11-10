@@ -1,0 +1,28 @@
+# --- web ---
+fastapi==0.111.0
+uvicorn[standard]==0.30.1       # [standard] pulls uvloop + httptools: a real
+                                # throughput win for free
+pydantic==2.7.3
+pydantic-settings==2.3.1        # typed, validated settings from env vars
+pyjwt==2.8.0                    # verifies the token the orders service issued
+
+# --- data (ALL async drivers) ---
+sqlalchemy[asyncio]==2.0.30
+asyncpg==0.29.0                 # async Postgres driver. psycopg2 here would
+                                # block the event loop on every query.
+alembic==1.13.1                 # migrations. SQLAlchemy has no built-in ones.
+redis==5.0.4                    # redis.asyncio is bundled since v4.2
+
+# --- messaging ---
+aiokafka==0.10.0                # async Kafka. kafka-python would block the loop.
+
+# --- ops ---
+prometheus-client==0.20.0
+httpx==0.27.0                   # also FastAPI's test client transport
+
+# --- dev / test ---
+pytest==8.2.1
+pytest-asyncio==0.23.7          # lets pytest await async test functions
+pytest-cov==5.0.0
+aiosqlite==0.20.0               # async SQLite for fast unit tests
+ruff==0.4.7
